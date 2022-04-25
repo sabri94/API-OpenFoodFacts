@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=Mdata2022
+    ports:
+    - '5432'
+    volumes: 
+    - ./data:/var/lib/postgresql/data
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=postgresql://postgres:Mdata2022@foodbuy-database.cjucets0w50l.eu-west-3.rds.amazonaws.com:5432/postgres
+      - API_HOST=https://world.openfoodfacts.org
+  metrics-dashboard:
+    container_name: foodbuy-api
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
