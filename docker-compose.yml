@@ -3,25 +3,25 @@ services:
   db:
     image: postgres
     environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=Mdata2022
+    - POSTGRES_USER=user
+    - POSTGRES_PASSWORD=password
     ports:
-    - '5432'
+    - database_port
     volumes: 
-    - ./data:/var/lib/postgresql/data
+    - volume_path
   api:
     build: .
     ports:
-      - '3000:3000'
+      - api_port
     environment:
-      - DATABASE_URL=postgresql://postgres:Mdata2022@foodbuy-database.cjucets0w50l.eu-west-3.rds.amazonaws.com:5432/postgres
+      - DATABASE_URL=postgresql://user:password@database_host:database_port/database_name
       - API_HOST=https://world.openfoodfacts.org
   metrics-dashboard:
-    container_name: foodbuy-api
+    container_name: mycontainer
     image: dpage/pgadmin4
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_EMAIL: mail
+      PGADMIN_DEFAULT_PASSWORD: mail_password
     ports:
-      - "5050:80"
+      - metrics-dashboard_port

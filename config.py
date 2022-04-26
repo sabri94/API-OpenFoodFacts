@@ -18,4 +18,4 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", default="secret-key-123")
 DEVELOPMENT = True
 DEBUG = True
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", default="postgresql://postgres:Mdata2022@foodbuy-database.cjucets0w50l.eu-west-3.rds.amazonaws.com:5432/postgres")
+SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", default="postgresql://user:password@database_host:database_port/database_name")
